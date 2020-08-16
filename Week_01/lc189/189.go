@@ -1,9 +1,6 @@
-package main
+// https://leetcode-cn.com/problems/rotate-array/
 
-func main() {
-	// rotate([]int{1, 2, 3, 4}, 3)
-	rotate_2([]int{1, 2, 3, 4, 5, 6, 7}, 3)
-}
+package lc189
 
 // 暴力解法
 // 两层循环
