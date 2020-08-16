@@ -1,7 +1,8 @@
 package main
 
 func main() {
-	rotate([]int{1, 2, 3, 4}, 3)
+	// rotate([]int{1, 2, 3, 4}, 3)
+	rotate_2([]int{1, 2, 3, 4, 5, 6, 7}, 3)
 }
 
 // 暴力解法
@@ -22,5 +23,36 @@ func rotate(nums []int, k int) {
 				nums[index] = num
 			}
 		}
+	}
+}
+
+// 优化版本
+// 移动次数对数组长度取余，为0的情况下不需要任何行动
+// 反转整个数组
+// 反转前k个数字
+// 反转后面的数字
+// 时间、空间复杂度都为O(1)
+// 比较难想到的算法，多在纸上画画应该会更好找规律
+func rotate_2(nums []int, k int) {
+	length := len(nums) // 数组总长度
+	k = k % length
+	if k == 0 {
+		return
+	}
+	reverse(&nums, 0, length-1)
+	reverse(&nums, 0, k-1)
+	reverse(&nums, k, length-1)
+}
+
+func reverse(nums *[]int, start, end int) {
+	length := end - start + 1
+	loopTime := 0
+	if length%2 == 1 {
+		loopTime = (length - 1) / 2
+	} else {
+		loopTime = length / 2
+	}
+	for index := 0; index < loopTime; index++ {
+		(*nums)[start+index], (*nums)[length-index-1+start] = (*nums)[length-index-1+start], (*nums)[start+index]
 	}
 }
