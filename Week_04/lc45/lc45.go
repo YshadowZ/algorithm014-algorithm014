@@ -6,21 +6,20 @@ package lc45
 func Jump(nums []int) int {
 	type node struct {
 		index int
-		value int
 		level int
 	}
-	start := &node{index: 0, value: nums[0], level: 0}
-	end := &node{index: len(nums) - 1, value: nums[len(nums)-1]}
+	start := &node{index: 0, level: 0}
+	end := &node{index: len(nums) - 1}
 	queue := []*node{start}
 	deep := 0
 	for len(queue) != 0 {
 		current := queue[0]
 		queue = queue[1:]
-		for i := 1; i <= current.value; i++ {
+		for i := 1; i <= nums[current.index]; i++ {
 			if current.index+i >= len(nums) {
 				break
 			}
-			child := &node{index: current.index + i, value: nums[current.index+i], level: current.level + 1}
+			child := &node{index: current.index + i, level: current.level + 1}
 			if child.index == end.index {
 				deep = child.level
 				break
